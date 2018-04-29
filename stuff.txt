@@ -1,0 +1,13 @@
+Get installed packages
+pacman -Qqe > pkglist.txt
+
+Get installed AUR packages
+pacman -Qqe | grep -v "$(pacman -Qqm)" > aurlist.txt
+
+Reinstall packages from list
+pacman -S - < pkglist.txt
+
+Remove ophaned
+pacman -Rns $(pacman -Qtdq)
+
+cat aurlist.txt | xargs pacman -S --needed --noconfirm
